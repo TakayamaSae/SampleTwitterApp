@@ -8,7 +8,9 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-   
+    
+    let names = ["太郎", "花子", "次郎"]
+    
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -20,9 +22,9 @@ class HomeViewController: UIViewController {
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-//        // カスタムセル
-//        let nib = UINib(nibName: "〇〇TableViewCell", bundle: nil)
-//        tableView.register(nib, forCellReuseIdentifier: "Cell")
+        // カスタムセル
+        let nib = UINib(nibName: "TweetTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "Cell")
     }
 }
 
@@ -37,7 +39,10 @@ extension HomeViewController: UITableViewDataSource {
     /// 各セルの内容を返すメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)as! TweetTableViewCell
+        cell.setup(username: "太郎", discription: "こんにちは")
+        
+        return cell
     }
 }
 
